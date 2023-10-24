@@ -85,6 +85,7 @@ const books = [
 
 let search = [];
 let result = [];
+let borrowed = [];
 
 let title = document.querySelector('#title');
 let author = document.querySelector('#author');
@@ -149,6 +150,7 @@ function searchBook(){
             } else {
                 p5.style.color = "green";
             }
+
             li.appendChild(h4);
             li.appendChild(p1);
             li.appendChild(p2);
@@ -160,14 +162,6 @@ function searchBook(){
             searchResult.appendChild(li);
 
             result.push(books[i]);
-
-            // Grab booklist index via "Borrow" -button
-            button.addEventListener('click', addBooks);
-
-            function addBooks(evt){
-                console.log(evt.target.classList.value);
-            }
-
 
         } else if(search[1] != null && books[i].author.toLowerCase().includes(search[1].toLowerCase())){
             h4.textContent = "Title: " + books[i].title;
@@ -185,6 +179,7 @@ function searchBook(){
             } else {
                 p5.style.color = "green";
             }
+
             li.appendChild(h4);
             li.appendChild(p1);
             li.appendChild(p2);
@@ -197,12 +192,6 @@ function searchBook(){
 
             result.push(books[i]);
 
-            // Grab booklist index via "Borrow" -button
-            button.addEventListener('click', addBooks);
-
-            function addBooks(evt){
-                console.log(evt.target.classList.value);
-            }
         } else if(search[2] != null && books[i].category.toLowerCase().includes(search[2].toLowerCase())){
             h4.textContent = "Title: " + books[i].title;
             p1.textContent = "Author: " + books[i].author;
@@ -219,6 +208,7 @@ function searchBook(){
             } else {
                 p5.style.color = "green";
             }
+
             li.appendChild(h4);
             li.appendChild(p1);
             li.appendChild(p2);
@@ -231,12 +221,6 @@ function searchBook(){
 
             result.push(books[i]);
 
-            // Grab booklist index via "Borrow" -button
-            button.addEventListener('click', addBooks);
-
-            function addBooks(evt){
-                console.log(evt.target.classList.value);
-            }
         } else if(books[i].publishYear === search[3]){
             h4.textContent = "Title: " + books[i].title;
             p1.textContent = "Author: " + books[i].author;
@@ -253,6 +237,7 @@ function searchBook(){
             } else {
                 p5.style.color = "green";
             }
+
             li.appendChild(h4);
             li.appendChild(p1);
             li.appendChild(p2);
@@ -264,12 +249,7 @@ function searchBook(){
             searchResult.appendChild(li);
 
             result.push(books[i]);
-             // Grab booklist index via "Borrow" -button
-             button.addEventListener('click', addBooks);
 
-             function addBooks(evt){
-                 console.log(evt.target.classList.value);
-             }
         } else if(books[i].pages === search[4]){
             h4.textContent = "Title: " + books[i].title;
             p1.textContent = "Author: " + books[i].author;
@@ -286,6 +266,7 @@ function searchBook(){
             } else {
                 p5.style.color = "green";
             }
+
             li.appendChild(h4);
             li.appendChild(p1);
             li.appendChild(p2);
@@ -297,15 +278,20 @@ function searchBook(){
             searchResult.appendChild(li);
 
             result.push(books[i]);
-
-            // Grab booklist index via "Borrow" -button
-            button.addEventListener('click', addBooks);
-
-            function addBooks(evt){
-                console.log(evt.target.classList.value);
-            }
         }
     } console.log(result);
+    // Grab booklist index via "Borrow" -button
+    const button = document.querySelectorAll('li button');
+
+    button.forEach(item => {item.addEventListener('click', addBooks)});
+
+    function addBooks(evt){
+        borrowed.push(books[evt.target.classList.value]);
+        console.log(evt.target.classList.value);
+        console.log(borrowed);
+        books[evt.target.classList.value].availability = "unavailable";
+        console.log(books[evt.target.classList.value]);
+    }
 }
 
 

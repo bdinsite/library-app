@@ -17,8 +17,11 @@
     <main>
         <div class="container">
             <div class="searchEngine">
-                <button type="submit" id="btn">Search</button>
-                <button type="reset" id="reset">Reset</button>
+                <div class="searchButtons">
+                    <button type="submit" id="btn">Search</button>
+                    <button type="reset" id="reset">Reset</button>
+                </div>
+                
                 <div class="form">
                     <label for="title">Book Title:</label>
                     <input type="text" id="title">
@@ -31,13 +34,15 @@
                     <label for="pages">Number of Pages:</label>
                     <input type="text" id="pages">
                 </div>
-                <div class="result">
-                    <div class="searchResult">
-                        <ol class="bookList"></ol>
-                        <!-- Content added via JS -->
-                    </div>
+            </div>
+
+            <div class="result">
+                <div class="searchResult">
+                    <ol class="bookList"></ol>
+                    <!-- Content added via JS -->
                 </div>
             </div>
+            
             <div class="myBooks">
                 <ol class="borrowed"></ol>
                     <!-- Content added via JS -->
