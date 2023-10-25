@@ -94,8 +94,9 @@ let publishYear = document.querySelector('#publishYear');
 let pages = document.querySelector('#pages');
 let btn = document.querySelector('#btn');
 let reset = document.querySelector('#reset');
-let ol = document.querySelector('ol');
-let li = document.querySelector('li');
+let ol = document.querySelector('.searchResult ol');
+
+const borrowedBooks = document.querySelector('.myBooks ol');
 let input = document.querySelectorAll('input');
 
 btn.addEventListener('click', searchBook);
@@ -103,7 +104,10 @@ reset.addEventListener('click', resetForm);
 
 // RESET FORM AND RESULT FIELD
 function resetForm(){
-    window.location.reload();
+    const child = document.querySelectorAll('.bookList li');
+    if(child){
+        child.forEach(item => item.remove());
+    } // li's removed in between -> no duplicates
     input.forEach((input) => {
         input.value = "";
     })
@@ -142,7 +146,7 @@ function searchBook(){
             p4.textContent = "Pages: " + books[i].pages;
             p5.textContent = "Availability: " + books[i].availability;
             button.textContent = "Borrow";
-            button.classList.add(i); // Add book index number in button -class (to use when clicking borrow-button)
+            button.classList.add(i); // Index number in button -class (to use when clicking borrow-button)
             if(books[i].availability !== "available"){
                 button.disabled = true;
                 button.style.backgroundColor = "#f4f4f5";
@@ -171,7 +175,7 @@ function searchBook(){
             p4.textContent = "Pages: " + books[i].pages;
             p5.textContent = "Availability: " + books[i].availability;
             button.textContent = "Borrow";
-            button.classList.add(i); // Add book index number in button -class (to use when clicking borrow-button)
+            button.classList.add(i); // Index number in button -class (to use when clicking borrow-button)
             if(books[i].availability !== "available"){
                 button.disabled = true;
                 button.style.backgroundColor = "#f4f4f5";
@@ -200,7 +204,7 @@ function searchBook(){
             p4.textContent = "Pages: " + books[i].pages;
             p5.textContent = "Availability: " + books[i].availability;
             button.textContent = "Borrow";
-            button.classList.add(i); // Add book index number in button -class (to use when clicking borrow-button)
+            button.classList.add(i); // Index number in button -class (to use when clicking borrow-button)
             if(books[i].availability !== "available"){
                 button.disabled = true;
                 button.style.backgroundColor = "#f4f4f5";
@@ -229,7 +233,7 @@ function searchBook(){
             p4.textContent = "Pages: " + books[i].pages;
             p5.textContent = "Availability: " + books[i].availability;
             button.textContent = "Borrow";
-            button.classList.add(i); // Add book index number in button -class (to use when clicking borrow-button)
+            button.classList.add(i); // Index number in button -class (to use when clicking borrow-button)
             if(books[i].availability !== "available"){
                 button.disabled = true;
                 button.style.backgroundColor = "#f4f4f5";
@@ -258,7 +262,7 @@ function searchBook(){
             p4.textContent = "Pages: " + books[i].pages;
             p5.textContent = "Availability: " + books[i].availability;
             button.textContent = "Borrow";
-            button.classList.add(i); // Add book index number in button -class (to use when clicking borrow-button)
+            button.classList.add(i); // Index number in button -class (to use when clicking borrow-button)
             if(books[i].availability !== "available"){
                 button.disabled = true;
                 button.style.backgroundColor = "#f4f4f5";
@@ -279,30 +283,46 @@ function searchBook(){
 
             result.push(books[i]);
         }
-    } console.log(result);
-    // Grab booklist index via "Borrow" -button
-    const button = document.querySelectorAll('li button');
+    }
+
+    // BORROW BOOK -> ADD TO "borrowed" ARRAY
+    const button = document.querySelectorAll('.bookList li button');
 
     button.forEach(item => {item.addEventListener('click', addBooks)});
 
     function addBooks(evt){
         borrowed.push(books[evt.target.classList.value]);
-        console.log(evt.target.classList.value);
-        console.log(borrowed);
         books[evt.target.classList.value].availability = "unavailable";
-        console.log(books[evt.target.classList.value]);
+        checkoutBook();
     }
+
 }
 
+// UPDATE MY_LIBRARY LIST
+function checkoutBook() {
+    const child = document.querySelectorAll('.borrowed li');
+    if(child){
+        child.forEach(item => item.remove());
+    } // li's removed in between -> no duplicates
+    borrowed.forEach(item => {
+        const book = document.createElement('li');
+        const title = document.createElement('h4');
+        const author = document.createElement('p');
+        const category = document.createElement('p');
+        const published = document.createElement('p');
+        const pages = document.createElement('p');
 
-// LIST OF BOOKS BORROWED
-function Book(title, author, category, publishYear, pages){
-    this.title = title;
-    this.author = author;
-    this.category = category;
-    this.publishYear = publishYear;
-    this.pages = pages;
-    this.info = function(){
-        return `${title} by ${author} - a ${category} Novel`;
-    }
+        title.textContent = item.title;
+        author.textContent = item.author;
+        category.textContent = item.category;
+        published.textContent = item.publishYear;
+        pages.textContent = item.pages;
+
+        book.appendChild(title);
+        book.appendChild(author);
+        book.appendChild(category);
+        book.appendChild(published);
+        book.appendChild(pages);
+        borrowedBooks.appendChild(book);
+    })
 }
