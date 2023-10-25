@@ -311,18 +311,26 @@ function checkoutBook() {
         const category = document.createElement('p');
         const published = document.createElement('p');
         const pages = document.createElement('p');
+        const button = document.createElement('button');
 
-        title.textContent = item.title;
-        author.textContent = item.author;
-        category.textContent = item.category;
-        published.textContent = item.publishYear;
-        pages.textContent = item.pages;
+        title.textContent = 'Title: ' + item.title;
+        author.textContent = 'Author: ' + item.author;
+        category.textContent = 'Category: ' + item.category;
+        published.textContent = 'Published: ' + item.publishYear;
+        pages.textContent = 'Pages: ' + item.pages;
+
+        button.classList.add('returnBook');
+        button.textContent = 'Return Book';
+
+        book.style.fontSize = '14px';
+        book.style.paddingTop = '20px';
 
         book.appendChild(title);
         book.appendChild(author);
         book.appendChild(category);
         book.appendChild(published);
         book.appendChild(pages);
+        book.appendChild(button);
         borrowedBooks.appendChild(book);
     })
 }

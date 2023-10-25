@@ -33,6 +33,11 @@
     /* width: 10px; */
     overflow: hidden;
     background: #eee;;
+    padding: 10px 30px;
+}
+
+.myBooks {
+    font-size: 22px;
 }
 
 .form {
@@ -47,7 +52,6 @@ h1 {
     z-index: 1;
     top: 50px;
     left: 100px;
-    /* font-family: 'Dancing Script', cursive; */
     font-size: 96px;
     font-weight: 100;
     color: #fff;
@@ -58,6 +62,9 @@ input {
     border-radius: 15px;
     margin: 5px 0;
     padding-left: 10px;
+    font-family: 'Playpen Sans', cursive;
+    font-size: 14px;
+    font-style: italic;
 }
 
 button {
