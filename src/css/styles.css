@@ -102,3 +102,64 @@ li button {
     background-color: dimgray;
     margin: 10px 0 30px 0;
 }
+
+/* ADD NEW BOOK FORM */
+
+.newBook {
+    position: absolute;
+    border: 1px solid #ddd;
+    width: 500px;
+    height: 500px;
+    top: -100%;
+    left: 30%;
+    z-index: 1;
+   /*  background: linear-gradient(to right, #aaa, #eee); */
+    background:  gray url(../img/addBook.jpg) no-repeat;
+    box-shadow: 3px 6px 3px 1px #aaa;
+    opacity: 0;
+    transform: scale(0.15);
+    transition: top 0ms ease-in-out 200ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 200ms ease-in-out 0ms;
+}
+
+.visible {
+    top: 10%;
+    opacity: 1;
+    transform: scale(1);
+    transition: top 0ms ease-in-out 0ms,
+                opacity 200ms ease-in-out 0ms,
+                transform 400ms ease-in-out 0ms;
+}
+
+.addBookForm h2 {
+    padding: 30px;
+    font-size: 30px;
+}
+
+.addBookForm h2,
+.addBookForm label,
+.addBookForm button {
+    font-family: 'Playpen Sans', cursive;
+    color: #fff;
+}
+
+.addBook>button,
+.addBookForm>button {
+    margin-top: 30px;
+    width: 220px;
+    background-color: lightgreen;
+    color: #313131;
+}
+
+.addBook>button {
+    margin-left: 30px;
+}
+
+.addBookForm {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+}

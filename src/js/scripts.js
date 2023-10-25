@@ -364,3 +364,23 @@ function checkoutBook() {
     }
 
 }
+
+// ADD NEW BOOK TO LIBRARY
+
+// Open form
+const addBookButton = document.querySelector('.addBook button');
+addBookButton.addEventListener('click', openForm);
+
+function openForm() {
+    const grabForm = document.querySelector('.newBook');
+    grabForm.classList.add('visible');
+}
+
+// Send form data
+const sendData = document.querySelector('#addBook');
+sendData.addEventListener('click', addBookToLibrary);
+
+function addBookToLibrary() {
+    const grabForm = document.querySelector('.newBook');
+    grabForm.classList.remove('visible');
+}
