@@ -1,46 +1,52 @@
 // LIBRARY - LIST OF BOOKS
 const books = [
     {
-      title: "The Great Gatsby",
-      author: "F. Scott Fitzgerald",
-      publishYear: 1925,
-      pages: 180,
-      category: "Classic",
-      availability: "available"
+        bookId: 100,
+        title: "The Great Gatsby",
+        author: "F. Scott Fitzgerald",
+        publishYear: 1925,
+        pages: 180,
+        category: "Classic",
+        availability: "available"
     },
     {
-      title: "To Kill a Mockingbird",
-      author: "Harper Lee",
-      publishYear: 1960,
-      pages: 281,
-      category: "Fiction",
-      availability: "available"
+        bookId: 101,
+        title: "To Kill a Mockingbird",
+        author: "Harper Lee",
+        publishYear: 1960,
+        pages: 281,
+        category: "Fiction",
+        availability: "available"
     },
     {
-      title: "1984",
-      author: "George Orwell",
-      publishYear: 1949,
-      pages: 328,
-      category: "Dystopian",
-      availability: "available"
+        bookId: 102,
+        title: "1984",
+        author: "George Orwell",
+        publishYear: 1949,
+        pages: 328,
+        category: "Dystopian",
+        availability: "available"
     },
     {
-      title: "The Hobbit",
-      author: "J.R.R. Tolkien",
-      publishYear: 1937,
-      pages: 310,
-      category: "Fantasy",
-      availability: "available"
+        bookId: 103,
+        title: "The Hobbit",
+        author: "J.R.R. Tolkien",
+        publishYear: 1937,
+        pages: 310,
+        category: "Fantasy",
+        availability: "available"
     },
     {
-      title: "The Catcher in the Rye",
-      author: "J.D. Salinger",
-      publishYear: 1951,
-      pages: 224,
-      category: "Coming of Age",
-      availability: "available"
+        bookId: 104,
+        title: "The Catcher in the Rye",
+        author: "J.D. Salinger",
+        publishYear: 1951,
+        pages: 224,
+        category: "Coming of Age",
+        availability: "available"
     },
     {
+        bookId: 105,
         title: "Last Summer",
         author: "Jane Tyle",
         publishYear: 2020,
@@ -49,6 +55,7 @@ const books = [
         availability: "available"
     },
     {
+        bookId: 106,
         title: "How to Lose Millions",
         author: "Gene Ious",
         publishYear: 2015,
@@ -57,6 +64,7 @@ const books = [
         availability: "available"
     },
     {
+        bookId: 107,
         title: "My First Tooth",
         author: "Paul Reed",
         publishYear: 2005,
@@ -65,6 +73,7 @@ const books = [
         availability: "available"
     },
     {
+        bookId: 108,
         title: "How to Find a Girl When You're Broke",
         author: "Kenneth Lint",
         publishYear: 2022,
@@ -73,6 +82,7 @@ const books = [
         availability: "available"
     },
     {
+        bookId: 109,
         title: "Just Found Dust Under the Bed",
         author: "Karen Nitpick",
         publishYear: 1988,
@@ -161,6 +171,7 @@ function searchBook(){
             li.appendChild(p3);
             li.appendChild(p4);
             li.appendChild(p5);
+            /* li.appendChild(p6); */
             li.appendChild(button);
 
             searchResult.appendChild(li);
@@ -281,7 +292,7 @@ function searchBook(){
 
             searchResult.appendChild(li);
 
-            result.push(books[i]);
+            result.push(books[i]);            
         }
     }
 
@@ -291,11 +302,11 @@ function searchBook(){
     button.forEach(item => {item.addEventListener('click', addBooks)});
 
     function addBooks(evt){
+        let index = borrowed.length-1;
         borrowed.push(books[evt.target.classList.value]);
         books[evt.target.classList.value].availability = "unavailable";
         checkoutBook();
     }
-
 }
 
 // UPDATE MY_LIBRARY LIST
@@ -319,9 +330,9 @@ function checkoutBook() {
         published.textContent = 'Published: ' + item.publishYear;
         pages.textContent = 'Pages: ' + item.pages;
 
-        button.classList.add('returnBook');
+        button.id = item.bookId;
         button.textContent = 'Return Book';
-
+        
         book.style.fontSize = '14px';
         book.style.paddingTop = '20px';
 
@@ -332,5 +343,24 @@ function checkoutBook() {
         book.appendChild(pages);
         book.appendChild(button);
         borrowedBooks.appendChild(book);
-    })
+    });
+
+    // RETURN BOOK
+    const button = document.querySelectorAll('.borrowed li button');
+
+    button.forEach(item => item.addEventListener('click', returnBook));
+
+    function returnBook(evt) {
+        // Change book status in books array
+        let searchResult = books.filter(item => item.bookId === Number(evt.target.id));
+        searchResult[0].availability = 'available';
+
+        // Remove returned book from borrowed array and from My Library list
+        let myBooks = borrowed.filter(item => item.bookId !== Number(evt.target.id));
+        borrowed = myBooks;
+        evt.target.parentElement.remove();
+        
+
+    }
+
 }
