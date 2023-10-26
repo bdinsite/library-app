@@ -362,7 +362,7 @@ function checkoutBook() {
         
 
     }
-
+    
 }
 
 // ADD NEW BOOK TO LIBRARY
@@ -382,5 +382,44 @@ sendData.addEventListener('click', addBookToLibrary);
 
 function addBookToLibrary() {
     const grabForm = document.querySelector('.newBook');
+
+    let title = document.querySelector('.addBookForm #title');
+    let author = document.querySelector('.addBookForm #author');
+    let category = document.querySelector('.addBookForm #category');
+    let publishYear = document.querySelector('.addBookForm #publishYear');
+    let pages = document.querySelector('.addBookForm #pages');
+    let bookId = books.length + 100;
+
+    if(title.value || author.value || category.value || publishYear.value || pages.value){
+        books.push({
+            bookId: bookId,
+            title: title.value,
+            author: author.value,
+            category: category.value,
+            publishYear: publishYear.value,
+            pages: pages.value,
+            availability: 'available',
+        });
+    
+        resetForm();
+    }
+    
+
     grabForm.classList.remove('visible');
+}
+
+
+// SHOW BORROWED BOOKS
+
+const menuIcon = document.querySelector('.hiddenBooks img');
+const grabDiv = document.querySelector('.myBooks');
+
+menuIcon.addEventListener('click', showBorrowedBooks);
+
+function showBorrowedBooks() {
+    if(grabDiv.classList.contains('showMyBooks')) {
+        grabDiv.classList.remove('showMyBooks');
+    } else {
+        grabDiv.classList.add('showMyBooks');
+    }
 }
